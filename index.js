@@ -31,6 +31,6 @@ convertCurrency('USD', 'CHF', 20)
   .then((data) => console.log(data))
   .catch((error) => console.log(error));
 
-  app.listen((5000), ()=>{
+  app.listen((process.env.PORT), ()=>{
     console.log('server listening on port 5000')
   })
