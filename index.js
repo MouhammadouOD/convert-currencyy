@@ -20,17 +20,26 @@ const convertCurrency = async (fromCurrency, toCurrency, amount) => {
   return `${amount} ${fromCurrency} is worth ${convertedAmount} ${toCurrency}. You can spend these in the following countries: ${countries}`;
 };
 
-app.get('/', async (req, res) =>{
-    const { fromCurrency, toCurrency, amount } = req.query
+app.get('/', async (req, res) => {
+  const { fromCurrency, toCurrency, amount } = req.query
+
+  if ( !fromCurrency || !toCurrency || !amount) {
+    res.send('please provide all the required parameters')
+
+  } else {
     const message = await convertCurrency(fromCurrency, toCurrency, amount);
 
     res.json(message)
+  }
+
 })
 
+/*
 convertCurrency('USD', 'CHF', 20)
   .then((data) => console.log(data))
   .catch((error) => console.log(error));
+  */
 
-  app.listen((process.env.PORT), ()=>{
-    console.log('server listening on port 5000')
-  })
+app.listen((process.env.PORT), () => {
+  console.log('server listening on port 5000')
+})
